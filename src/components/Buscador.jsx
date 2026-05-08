@@ -1,27 +1,20 @@
-import React from 'react';
+import { FiSearch } from "react-icons/fi";
+import { useTasks } from "../context/TaskContext";
 
-export const Buscador = ({ setTextoBusqueda }) => {
-    
-    // Esta función se ejecuta cada vez que el usuario presiona una tecla
-    const manejarCambio = (evento) => {
-        setTextoBusqueda(evento.target.value);
-    };
+export function Buscador() {
+  const { searchTerm, setSearchTerm } = useTasks();
 
-    return (
-        <div style={{ marginBottom: '20px' }}>
-            <input 
-                type="text" 
-                placeholder="🔍 Buscar tarea por nombre..." 
-                onChange={manejarCambio}
-                style={{ 
-                    width: '100%', 
-                    padding: '12px', 
-                    borderRadius: '6px', 
-                    border: '1px solid #ccc',
-                    fontSize: '16px',
-                    boxSizing: 'border-box'
-                }}
-            />
-        </div>
-    );
-};
+  return (
+    <div className="search-box">
+      <input
+        type="text"
+        placeholder="Buscar tarea por nombre..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <button type="button">
+        <FiSearch /> Buscar
+      </button>
+    </div>
+  );
+}
