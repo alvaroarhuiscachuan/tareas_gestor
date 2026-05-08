@@ -1,23 +1,30 @@
+import { FiTrash2 } from "react-icons/fi";
 import { useTasks } from "../context/TaskContext";
 
 export function TaskItem({ task }) {
   const { toggleTask, deleteTask } = useTasks();
 
   return (
-    <li>
-      <input
-        type="checkbox"
-        checked={task.completed}
-        onChange={() => toggleTask(task.id)}
-      />
+    <li className="task-item">
+      <div className="task-main">
+        <input
+          type="checkbox"
+          checked={task.completed}
+          onChange={() => toggleTask(task.id)}
+        />
 
-      <span style={{ textDecoration: task.completed ? "line-through" : "none" }}>
-        {task.title}
+        <span className={`task-title ${task.completed ? "completed" : ""}`}>
+          {task.title}
+        </span>
+      </div>
+
+      <span className={`priority ${task.priority.toLowerCase()}`}>
+        {task.priority}
       </span>
 
-      <strong> Prioridad: {task.priority}</strong>
-
-      <button onClick={() => deleteTask(task.id)}>Eliminar</button>
+      <button className="delete-btn" onClick={() => deleteTask(task.id)}>
+        <FiTrash2 /> Eliminar
+      </button>
     </li>
   );
 }
